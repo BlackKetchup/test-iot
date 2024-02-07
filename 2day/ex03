@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+int main()
+{
+    int a, b;
+    printf("첫번째 변수를 입력하시오 :");
+    scanf("%d", &a);
+    printf("두번째 변수를 입력하시오 :");
+    scanf("%d", &b);
+    
+    int temp = a;
+    a = b;
+    b = temp;
+
+    printf("결과 : %d, %d \n", a, b);
+
+    return 0;
+}
