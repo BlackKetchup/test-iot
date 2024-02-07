@@ -1,0 +1,13 @@
+#include <stdio.h>
+
+int main()
+{
+    int deg;
+    printf("섭씨 온도를 적어주세요 :");
+    scanf("%d", &deg);
+    
+    double fah = deg*9.0/5 +32;
+    printf("결과 : %.1fF\n", fah);
+
+    return 0;
+}
