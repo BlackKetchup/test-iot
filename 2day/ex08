@@ -1,0 +1,15 @@
+#include <stdio.h>
+
+int main()
+{
+    int a;
+    double b; //변수선언
+
+    printf("섭씨 온도를 입력해주십시오 : ");
+    scanf("%d", &a); //입력
+
+    b = 9.0/5.0 * a + 32; //로직(연산)
+    printf("결과 : %.2fF \n", b); //출력
+
+    return 0;
+}
