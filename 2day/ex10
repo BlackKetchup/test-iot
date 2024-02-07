@@ -1,0 +1,35 @@
+마름모 만들기
+-----------------------------------
+#include <stdio.h>
+
+int main()
+{
+    int a;
+    scanf("%d", &a);
+    int b, c;
+    int star = 0, blank = 0;
+    for(b = 1; b <= a; b++)
+    {
+        if(b * 2 - 1 <= a)
+        {
+            star = b * 2 + 1;
+        }
+        else
+        {
+            star = a * 2 - b * 2 + 1;
+        }
+        blank = (a - star)/2;
+        for(c = 1;c < blank; c++)
+        {
+            printf("");
+        }
+        for(c = 1; c <=star; c++)
+        {
+            printf("*");
+        }
+        printf("\n");
+    }
+    
+    
+    return 0;
+}
