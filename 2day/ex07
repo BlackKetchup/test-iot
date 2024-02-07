@@ -1,0 +1,22 @@
+#include <stdio.h>
+
+int main()
+{
+    int a; //변수선언
+    double b; //변수선언
+
+    scanf("%d", &a); //입력
+
+    b = (double)9 / 5 * a + 32; //로직(Logic)
+    
+    
+    printf("%.2f \n", b); //출력
+
+    return 0;
+}
+
+/*
+1. 입력, 변수선언
+2. 로직(Logic)
+3. 출력
+*/
