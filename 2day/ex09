@@ -1,0 +1,17 @@
+홀수짝수 하는법
+------------------------------------------------
+#include <stdio.h>
+
+int main()
+{
+    int a;
+    printf("숫자를 입력하십시오 : ");
+    scanf("%d", &a);
+
+    if(a%2 == 0)
+        printf("짝\n");
+    else
+        printf("홀\n");
+
+    return 0;
+}
