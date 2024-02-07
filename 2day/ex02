@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+int main()
+{
+    int width; //변수선언
+    int hegiht; //변수선언
+    printf("width : "); //입력
+    scanf("%d", &width); //입력
+    printf("hegiht : "); //입력
+    scanf("%d", &hegiht); //입력
+
+    
+    double area = width * hegiht / 2; //로직(수식)
+
+    printf("결과 : %.2f \n", area); //출력
+
+    return 0;
+}
