@@ -1,0 +1,1194 @@
+// Main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/cityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="도시명"
+        android:textSize="48sp"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/temperatureTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="온도"
+        android:textSize="24sp"
+        android:layout_below="@id/cityTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/humidityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="습도"
+        android:textSize="24sp"
+        android:layout_below="@id/temperatureTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/weatherConditionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="날씨 상태"
+        android:textSize="24sp"
+        android:layout_below="@id/humidityTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/windSpeedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="풍속"
+        android:textSize="24sp"
+        android:layout_below="@id/weatherConditionTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/seoulButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="서울"
+        android:layout_below="@id/windSpeedTextView"
+        android:layout_marginTop="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"/>
+
+    <Button
+        android:id="@+id/incheonButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="인천"
+        android:layout_below="@id/windSpeedTextView"
+        android:layout_marginTop="40dp"
+        android:layout_toEndOf="@id/seoulButton"
+        android:layout_marginStart="20dp"/>
+
+    <Button
+        android:id="@+id/daejeonButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="대전"
+        android:layout_below="@id/windSpeedTextView"
+        android:layout_marginTop="40dp"
+        android:layout_toEndOf="@id/incheonButton"
+        android:layout_marginStart="20dp"/>
+
+    <Button
+        android:id="@+id/daeguButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="대구"
+        android:layout_below="@id/seoulButton"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"/>
+
+    <Button
+        android:id="@+id/ulsanButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="울산"
+        android:layout_below="@id/incheonButton"
+        android:layout_marginTop="30dp"
+        android:layout_toEndOf="@id/daeguButton"
+        android:layout_marginStart="20dp"/>
+
+    <Button
+        android:id="@+id/busanButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="부산"
+        android:layout_below="@id/daejeonButton"
+        android:layout_marginTop="30dp"
+        android:layout_toEndOf="@id/ulsanButton"
+        android:layout_marginStart="20dp"/>
+
+    <Button
+        android:id="@+id/gwangjuButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="광주"
+        android:layout_below="@id/daeguButton"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"/>
+
+    <Button
+        android:id="@+id/sejongButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="세종"
+        android:layout_below="@id/ulsanButton"
+        android:layout_marginTop="30dp"
+        android:layout_toEndOf="@id/gwangjuButton"
+        android:layout_marginStart="20dp"/>
+
+    <Button
+        android:id="@+id/jejuButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="제주"
+        android:layout_below="@id/busanButton"
+        android:layout_marginTop="30dp"
+        android:layout_toEndOf="@id/sejongButton"
+        android:layout_marginStart="20dp"/>
+</RelativeLayout>
+
+-----------------------------------------------------------
+// Main.java
+package com.example.myfirstproject01;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    private TextView cityTextView;
+    private TextView temperatureTextView;
+    private TextView humidityTextView;
+    private TextView weatherConditionTextView;
+    private TextView windSpeedTextView;
+    private Button seoulButton;
+    private Button incheonButton;
+    private Button daejeonButton;
+    private Button daeguButton;
+    private Button ulsanButton;
+    private Button busanButton;
+    private Button gwangjuButton;
+    private Button sejongButton;
+    private Button jejuButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        cityTextView = findViewById(R.id.cityTextView);
+        temperatureTextView = findViewById(R.id.temperatureTextView);
+        humidityTextView = findViewById(R.id.humidityTextView);
+        weatherConditionTextView = findViewById(R.id.weatherConditionTextView);
+        windSpeedTextView = findViewById(R.id.windSpeedTextView);
+        seoulButton = findViewById(R.id.seoulButton);
+        incheonButton = findViewById(R.id.incheonButton);
+        daejeonButton = findViewById(R.id.daejeonButton);
+        daeguButton = findViewById(R.id.daeguButton);
+        ulsanButton = findViewById(R.id.ulsanButton);
+        busanButton = findViewById(R.id.busanButton);
+        gwangjuButton = findViewById(R.id.gwangjuButton);
+        sejongButton = findViewById(R.id.sejongButton);
+        jejuButton = findViewById(R.id.jejuButton);
+
+        seoulButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(MainActivity.this, Seoul.class);
+                startActivity(intent);
+            }
+        });
+
+        incheonButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Incheon.class);
+                startActivity(intent);
+            }
+        });
+
+        daejeonButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Deajeon.class);
+                startActivity(intent);
+            }
+        });
+
+        daeguButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Deagu.class);
+                startActivity(intent);
+            }
+        });
+
+        ulsanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Ulsan.class);
+                startActivity(intent);
+            }
+        });
+
+        busanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Busan.class);
+                startActivity(intent);
+            }
+        });
+
+        gwangjuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Gwangju.class);
+                startActivity(intent);
+            }
+        });
+
+        sejongButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Sejong.class);
+                startActivity(intent);
+            }
+        });
+
+        jejuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Jeju.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void updateWeather(String city, String temperature, String humidity, String weatherCondition, String windSpeed) {
+        cityTextView.setText(city);
+        temperatureTextView.setText(temperature);
+        humidityTextView.setText(humidity);
+        weatherConditionTextView.setText(weatherCondition);
+        windSpeedTextView.setText(windSpeed);
+    }
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------
+// Seoul.xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Seoul">
+
+    <TextView
+        android:id="@+id/cityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="도시명 : 서울"
+        android:textSize="48sp"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/temperatureTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="온도 : 28°C"
+        android:textSize="24sp"
+        android:layout_below="@id/cityTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/humidityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="습도 : 60%"
+        android:textSize="24sp"
+        android:layout_below="@id/temperatureTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/weatherConditionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="날씨 상태 : 흐림"
+        android:textSize="24sp"
+        android:layout_below="@id/humidityTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/windSpeedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="풍속 : 8m/s"
+        android:textSize="24sp"
+        android:layout_below="@id/weatherConditionTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/BackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="뒤로"
+        android:layout_below="@id/windSpeedTextView"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="130dp"/>
+</RelativeLayout>
+
+-----------------------------------------------------------------------------------------------------------
+// Seoul.java
+package com.example.myfirstproject01;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class Seoul extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_seoul);
+        Button BackButton = (Button) findViewById(R.id.BackButton);
+        BackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Seoul.this, MainActivity.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+    }
+}
+
+-------------------------------------------------------------------------------------------------------------
+// Incheon.xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Incheon">
+
+    <TextView
+        android:id="@+id/cityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="도시명 : 인천"
+        android:textSize="48sp"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/temperatureTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="온도 : 26°C"
+        android:textSize="24sp"
+        android:layout_below="@id/cityTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/humidityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="습도 : 40%"
+        android:textSize="24sp"
+        android:layout_below="@id/temperatureTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/weatherConditionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="날씨 상태 : 맑음"
+        android:textSize="24sp"
+        android:layout_below="@id/humidityTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/windSpeedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="풍속 : 6m/s"
+        android:textSize="24sp"
+        android:layout_below="@id/weatherConditionTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/BackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="뒤로"
+        android:layout_below="@id/windSpeedTextView"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="130dp"/>
+</RelativeLayout>
+
+-------------------------------------------------------------------------------------------------------
+// Incheon.java
+package com.example.myfirstproject01;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class Incheon extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_incheon);
+        Button BackButton = (Button) findViewById(R.id.BackButton);
+        BackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Incheon.this, MainActivity.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+    }
+}
+
+-----------------------------------------------------------------------------------------------------------
+// Deajeon.xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Deajeon">
+
+    <TextView
+        android:id="@+id/cityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="도시명 : 대전"
+        android:textSize="48sp"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/temperatureTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="온도 : 27°C"
+        android:textSize="24sp"
+        android:layout_below="@id/cityTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/humidityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="습도 :55%"
+        android:textSize="24sp"
+        android:layout_below="@id/temperatureTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/weatherConditionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="날씨 상태 : 부분적으로 흐림"
+        android:textSize="24sp"
+        android:layout_below="@id/humidityTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/windSpeedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="풍속 : 9m/s"
+        android:textSize="24sp"
+        android:layout_below="@id/weatherConditionTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/BackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="뒤로"
+        android:layout_below="@id/windSpeedTextView"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="130dp"/>
+</RelativeLayout>
+
+-------------------------------------------------------------------------------
+// Deajeon.java
+package com.example.myfirstproject01;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class Deajeon extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_deajeon);
+        Button BackButton = (Button) findViewById(R.id.BackButton);
+        BackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Deajeon.this, MainActivity.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+    }
+}
+
+-----------------------------------------------------------------------------------
+// Deagu.xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Deagu">
+
+    <TextView
+        android:id="@+id/cityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="도시명 : 대구"
+        android:textSize="48sp"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/temperatureTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="온도 : 32°C"
+        android:textSize="24sp"
+        android:layout_below="@id/cityTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/humidityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="습도 : 45%"
+        android:textSize="24sp"
+        android:layout_below="@id/temperatureTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/weatherConditionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="날씨 상태 : 맑음"
+        android:textSize="24sp"
+        android:layout_below="@id/humidityTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/windSpeedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="풍속 : 6m/s"
+        android:textSize="24sp"
+        android:layout_below="@id/weatherConditionTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/BackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="뒤로"
+        android:layout_below="@id/windSpeedTextView"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="130dp"/>
+</RelativeLayout>
+
+----------------------------------------------------------------------
+// Deagu.java
+package com.example.myfirstproject01;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class Deagu extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_deagu);
+        Button BackButton = (Button) findViewById(R.id.BackButton);
+        BackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Deagu.this, MainActivity.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+    }
+}
+
+----------------------------------------------------------------------------------
+// Ulsan.xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Ulsan">
+
+    <TextView
+        android:id="@+id/cityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="도시명 : 울산"
+        android:textSize="48sp"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/temperatureTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="온도 : 27°C"
+        android:textSize="24sp"
+        android:layout_below="@id/cityTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/humidityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="습도 : 52%"
+        android:textSize="24sp"
+        android:layout_below="@id/temperatureTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/weatherConditionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="날씨 상태 : 대부분 흐림"
+        android:textSize="24sp"
+        android:layout_below="@id/humidityTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/windSpeedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="풍속 8m/s"
+        android:textSize="24sp"
+        android:layout_below="@id/weatherConditionTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/BackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="뒤로"
+        android:layout_below="@id/windSpeedTextView"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="130dp"/>
+</RelativeLayout>
+
+------------------------------------------------------------
+// Ulsan.java
+package com.example.myfirstproject01;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class Ulsan extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_ulsan);
+        Button BackButton = (Button) findViewById(R.id.BackButton);
+        BackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Ulsan.this, MainActivity.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+    }
+}
+
+--------------------------------------------------------------------------------
+// Busan.xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Busan">
+
+    <TextView
+        android:id="@+id/cityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="도시명 : 부산"
+        android:textSize="48sp"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/temperatureTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="온도 : 26°C"
+        android:textSize="24sp"
+        android:layout_below="@id/cityTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/humidityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="습도 : 60%"
+        android:textSize="24sp"
+        android:layout_below="@id/temperatureTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/weatherConditionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="날씨 상태 : 비"
+        android:textSize="24sp"
+        android:layout_below="@id/humidityTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/windSpeedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="풍속 : 11m/s"
+        android:textSize="24sp"
+        android:layout_below="@id/weatherConditionTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/BackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="뒤로"
+        android:layout_below="@id/windSpeedTextView"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="130dp"/>
+</RelativeLayout>
+
+---------------------------------------------------------------
+// Busan.java
+package com.example.myfirstproject01;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class Busan extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_busan);
+        Button BackButton = (Button) findViewById(R.id.BackButton);
+        BackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Busan.this, MainActivity.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+    }
+}
+
+----------------------------------------------------------------------------
+// Gwangju.xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Gwangju">
+
+    <TextView
+        android:id="@+id/cityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="도시명 : 광주"
+        android:textSize="48sp"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/temperatureTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="온도 : 25°C"
+        android:textSize="24sp"
+        android:layout_below="@id/cityTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/humidityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="습도 : 53%"
+        android:textSize="24sp"
+        android:layout_below="@id/temperatureTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/weatherConditionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="날씨 상태 : 부분적으로 흐림"
+        android:textSize="24sp"
+        android:layout_below="@id/humidityTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/windSpeedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="풍속 : 10m/s"
+        android:textSize="24sp"
+        android:layout_below="@id/weatherConditionTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/BackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="뒤로"
+        android:layout_below="@id/windSpeedTextView"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="130dp"/>
+</RelativeLayout>
+
+-------------------------------------------------------------
+// Gwangju.java
+package com.example.myfirstproject01;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class Gwangju extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_gwangju);
+        Button BackButton = (Button) findViewById(R.id.BackButton);
+        BackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Gwangju.this, MainActivity.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+    }
+}
+
+-----------------------------------------------------------------------------------
+// Sejong.xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Sejong">
+
+    <TextView
+        android:id="@+id/cityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="도시명 : 세종"
+        android:textSize="48sp"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/temperatureTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="온도 : 26°C"
+        android:textSize="24sp"
+        android:layout_below="@id/cityTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/humidityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="습도 : 53%"
+        android:textSize="24sp"
+        android:layout_below="@id/temperatureTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/weatherConditionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="날씨 상태 : 부분적으로 흐림"
+        android:textSize="24sp"
+        android:layout_below="@id/humidityTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/windSpeedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="풍속 : 8m/s"
+        android:textSize="24sp"
+        android:layout_below="@id/weatherConditionTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/BackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="뒤로"
+        android:layout_below="@id/windSpeedTextView"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="130dp"/>
+</RelativeLayout>
+
+--------------------------------------------------------------
+// Sejong.java
+package com.example.myfirstproject01;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class Sejong extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sejong);
+        Button BackButton = (Button) findViewById(R.id.BackButton);
+        BackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Sejong.this, MainActivity.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+    }
+}
+
+-------------------------------------------------------------------------------
+// Jeju.xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Jeju">
+
+    <TextView
+        android:id="@+id/cityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="도시명 : 제주"
+        android:textSize="48sp"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/temperatureTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="온도 : 24°C"
+        android:textSize="24sp"
+        android:layout_below="@id/cityTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/humidityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="습도 : 65%"
+        android:textSize="24sp"
+        android:layout_below="@id/temperatureTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/weatherConditionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="날씨 상태 : 뇌우"
+        android:textSize="24sp"
+        android:layout_below="@id/humidityTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/windSpeedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="풍속 : 13m/s"
+        android:textSize="24sp"
+        android:layout_below="@id/weatherConditionTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/BackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="뒤로"
+        android:layout_below="@id/windSpeedTextView"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="130dp"/>
+</RelativeLayout>
+
+-----------------------------------------------------------
+// Jeju.java
+package com.example.myfirstproject01;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class Jeju extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_jeju);
+        Button BackButton = (Button) findViewById(R.id.BackButton);
+        BackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Jeju.this, MainActivity.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+    }
+}
