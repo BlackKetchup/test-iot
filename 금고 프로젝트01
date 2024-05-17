@@ -1,0 +1,123 @@
+#include <MFRC522v2.h>
+#include <MFRC522DriverSPI.h>
+#include <MFRC522DriverPinSimple.h>
+#include <MFRC522Debug.h>
+#include <LiquidCrystal_I2C.h>
+#include <Stepper.h>
+
+enum PIN {
+  RED = A0,
+  GREEN,
+  BLUE,
+  BUZZ
+};
+
+class MFRC522DriverPinSimple sda_pin(53);
+class MFRC522DriverSPI driver {
+  sda_pin
+};
+class MFRC522 mfrc522 {
+  driver
+};
+const String MASTER_CARD_UID{
+  String("F4213C2A")
+};
+
+class LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+const uint16_t STEP_PER_REVOLUTION(2048U);                    // 32step(1바퀴) * 64(기어비)
+class Stepper stepping(STEP_PER_REVOLUTION, 24, 26, 25, 27);  // 핀 번호
+
+const String MASTER_PASSWORD{"123456789"};
+
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(115200UL);
+  Serial1.begin(9600UL);
+  mfrc522.PCD_Init();  // 초기화 (통신은 항상 초기화 필요)
+  pinMode(RED, OUTPUT);
+  pinMode(GREEN, OUTPUT);
+  pinMode(BLUE, OUTPUT);
+  pinMode(BUZZ, OUTPUT);
+  lcd.init();
+  lcd.home();  // (0,0)은 Cursor(커서)가(0,0)으로 가세요.
+  lcd.backlight();
+  stepping.setSpeed(14);  // RPM 14;
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  if (Serial1.available()) {                      // ()안에 블루투스를 통해서 값이 들어왔으면 if 구문을 들어간다.
+    String password{Serial1.readStringUntil('\n')};  // 1byte를 읽어서 ascii code(아스키코드)
+    if (password == MASTER_PASSWORD) {
+      tone(BUZZ, 1000);
+      delay(100UL);
+      noTone(BUZZ);
+      delay(100UL);
+      tone(BUZZ, 1000);
+      delay(100UL);
+      noTone(BUZZ);
+      delay(100UL);
+      digitalWrite(RED, HIGH);
+      digitalWrite(GREEN, HIGH);
+      digitalWrite(BLUE, HIGH);
+      lcd.clear();
+      lcd.setCursor(0, 0);
+      lcd.print("Welcome friend!");
+      lcd.setCursor(0, 1);
+      lcd.print("The door opens!");
+      stepping.step(STEP_PER_REVOLUTION * 5);  // 반바퀴는 나누기 2 ex) stepping.step(STEP_PER_REVOLUTION/2);
+      delay(1000UL);
+      stepping.step(-STEP_PER_REVOLUTION * 5);  // 반시계 방향은 앞에 마이너스 붙이면 됨 ex)stepping.step(-STEP_PER_REVOLUTION);
+      delay(1000UL);
+      Serial.println(F("금고 문이 열립니다!"));
+      Serial1.println(F("금고 문이 열립니다!"));  // Bluetooth 창으로 출력
+    }
+  }
+  if (!mfrc522.PICC_IsNewCardPresent()) return;
+  if (!mfrc522.PICC_ReadCardSerial()) return;
+  String tagID = "";  // 빈 문자열
+  for (uint8_t i{ 0u }; i < 4; ++i) {
+    tagID += String(mfrc522.uid.uidByte[i], HEX);
+  }
+  tagID.toUpperCase();   
+  mfrc522.PICC_HaltA();  
+  if (tagID == MASTER_CARD_UID) {
+    Serial.println(F("키가 일치합니다. 금고 문이 열립니다!"));
+    Serial1.println(F("키가 일치합니다. 금고 문이 열립니다!"));
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Welcome friend!");
+    lcd.setCursor(0, 1);
+    lcd.print("The door opens!");
+    digitalWrite(RED, LOW);
+    digitalWrite(GREEN, HIGH);
+    digitalWrite(BLUE, LOW);
+    tone(BUZZ, 1000);
+    delay(100UL);
+    noTone(BUZZ);
+    delay(100UL);
+    stepping.step(STEP_PER_REVOLUTION * 5);  // 반바퀴는 나누기 2 ex) stepping.step(STEP_PER_REVOLUTION/2);
+    delay(1000UL);
+    stepping.step(-STEP_PER_REVOLUTION * 5);  // 반시계 방향은 앞에 마이너스 붙이면 됨 ex)stepping.step(-STEP_PER_REVOLUTION);
+    delay(1000UL);
+  } else {
+    Serial.println(F("카드키 일치하지 않습니다. 금고 문이 잠깁니다!"));
+    Serial1.println(F("카드ㅋ; 일치하지 않습니다. 금고 문이 잠깁니다!"));
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Get away!");
+    lcd.setCursor(0, 1);
+    lcd.print("The door closes!");
+    digitalWrite(RED, HIGH);
+    digitalWrite(GREEN, LOW);
+    digitalWrite(BLUE, LOW);
+    for (int i = 0; i < 3; i++) {
+      tone(BUZZ, 500);
+      delay(50UL);
+      noTone(BUZZ);
+      delay(50UL);
+    }
+  }
+}
