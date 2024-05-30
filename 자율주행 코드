@@ -1,0 +1,65 @@
+from AltinoLite import *
+import keyboard
+# 블루투스 연결을 초기화합니다.
+Open()
+
+
+# 장애물 회피 동작을 정의합니다.
+def avoid_obstacle():
+
+    #바퀴 돌리기
+    front_left = sensor.IR[1]
+    front_right = sensor.IR[3]
+    if front_left > 104 or front_right > 20 or sensor.IR[2] > 34:
+        # 회피 방향을 결정 (기본은 오른쪽으로 회피)
+        if front_left > front_right+73:
+            go(-350, -350)  # 후진
+            delay(600)
+            DisplayLine(24, 24, 24, 24, 24, 126, 60, 24)  # 우회전
+            steering(127)  # 오른쪽으로 회전
+            go(350, 350)
+        else:
+            go(-350, -350)  # 후진
+            delay(600)
+            DisplayLine(24, 60, 126, 24, 24, 24, 24, 24)  # 좌회전
+            steering(-127)  # 왼쪽으로 회전
+            go(350, 350)
+        delay(700)
+
+    #바퀴 1자 마추기
+    steering(0)  # 핸들 중앙으로
+    DisplayLine(0, 32, 96, 255, 255, 96, 32, 0)  # 직진
+
+
+
+
+
+
+# 주행 로직을 구현합니다.
+def main_drive():
+    try:
+        while True:
+            if keyboard.is_pressed('P'):
+                go(0, 0)
+                sound(0)
+                DisplayLine(0, 0, 255, 136, 136, 136, 112, 0)
+                print("주차를 시작합니다.")
+                break
+            # 장애물 감지 및 회피 로직
+            if sensor.IR[2] > 34:  # 앞쪽 장애물 감지
+                avoid_obstacle()
+            elif sensor.IR[1] >104:  # 왼쪽 장애물 감지
+                avoid_obstacle()
+            elif sensor.IR[3] > 20:  # 오른쪽 장애물 감지
+                avoid_obstacle()
+            else:
+                DisplayLine(0, 32, 96, 255, 255, 96, 32, 0)  # 직진
+                go(350, 350)  # 장애물이 없으면 계속 전진
+                delay(100)
+
+    finally:
+        # 블루투스 연결을 닫습니다.
+        close()
+
+
+main_drive()
